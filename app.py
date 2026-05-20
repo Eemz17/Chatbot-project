@@ -28,7 +28,7 @@ NEGATIVE_FEEDBACK = [
 LEVEL_RULES = {
     1: {"questions": 3, "pass_mark": 2},
     2: {"questions": 3, "pass_mark": 2},
-    3: {"questions": 1, "pass_mark": 1}  # final scenario
+    3: {"questions": 1, "pass_mark": 0}  # final scenario
 }
 
 def initialise_state():
