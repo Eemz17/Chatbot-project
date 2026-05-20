@@ -28,7 +28,7 @@ NEGATIVE_FEEDBACK = [
 LEVEL_RULES = {
     1: {"questions": 3, "pass_mark": 2},
     2: {"questions": 3, "pass_mark": 2},
-    3: {"questions": 1, "pass_mark": 0}  # final scenario
+    3: {"questions": 1, "pass_mark": 1}  # final scenario
 }
 
 def initialise_state():
@@ -82,7 +82,7 @@ def move_or_finish():
             st.session_state.persona_messages.append(f"Great! Moving on to Level {st.session_state.current_difficulty} 🔐")
         else:
             st.session_state.finished = True
-            st.session_state.final_message = "Congratulations! You completed the final advanced scenario 🎉"
+            st.session_state.final_message = "Congratulations! You completed the final advanced scenario"
     else:
         st.session_state.finished = True
         st.session_state.final_message = f"You did not achieve the pass mark for Level {difficulty}. Try again later."
@@ -104,7 +104,7 @@ def reset_chatbot():
 initialise_state()
 
 st.title("🛡️ Cybersecurity Awareness Chatbot")
-st.subheader("Your friendly cybersecurity advisor is here! 🕵️‍♂️")
+st.subheader("Your friendly cybersecurity advisor is here!")
 
 # --- Instructions ---
 if not st.session_state.started:
