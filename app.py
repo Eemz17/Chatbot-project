@@ -109,7 +109,7 @@ st.subheader("Your friendly cybersecurity advisor is here!")
 # --- Instructions ---
 if not st.session_state.started:
     st.write("""
-    Welcome! You will progress through phishing scenarios.
+    Welcome! You will progress through phishing and social engineering scenarios.
     - Level 1: Easy (3 questions, pass 2/3)
     - Level 2: Moderate (3 questions, pass 2/3)
     - Level 3: Final advanced scenario (1 question)
