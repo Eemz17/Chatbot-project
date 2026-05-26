@@ -177,7 +177,7 @@ else:
         comments = st.text_area("Optional comments (no personal info)")
 
         if not st.session_state.feedback_submitted and st.button("Submit Feedback"):
-            save_feedback(st.session_state.score, st.session_state.total_answered, percentage, rating, comments)
+            save_feedback(st.session_state.score, st.session_state.percentage, rating, comments)
             st.session_state.feedback_submitted = True
             st.success("Thank you! Feedback recorded anonymously.")
         elif st.session_state.feedback_submitted:
