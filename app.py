@@ -92,7 +92,7 @@ def save_feedback(score, total_answered, percentage, rating, comments):
     with open("feedback.csv", "a", newline="", encoding="utf-8") as file:
         writer = csv.writer(file)
         if not file_exists:
-            writer.writerow(["Timestamp","Score","Total Answered","Percentage","Rating","Comment"])
+            writer.writerow(["Timestamp","Score","Percentage","Rating","Comment"])
         writer.writerow([datetime.now().strftime("%Y-%m-%d %H:%M:%S"), score, total_answered, f"{percentage:.0f}", rating, comments])
 
 def reset_chatbot():
@@ -177,7 +177,7 @@ else:
         comments = st.text_area("Optional comments (no personal info)")
 
         if not st.session_state.feedback_submitted and st.button("Submit Feedback"):
-            save_feedback(st.session_state.score, st.session_state.percentage, rating, comments)
+            save_feedback(st.session_state.score, st.session_state.total_answered, percentage, rating, comments)
             st.session_state.feedback_submitted = True
             st.success("Thank you! Feedback recorded anonymously.")
         elif st.session_state.feedback_submitted:
