@@ -87,14 +87,28 @@ def move_or_finish():
         st.session_state.finished = True
         st.session_state.final_message = f"You did not achieve the pass mark for Level {difficulty}. Try again later."
 
-def save_feedback(score, total_answered, percentage, rating, comments):
+def save_feedback(score, percentage, rating, comments):
     file_exists = os.path.isfile("feedback.csv")
+
     with open("feedback.csv", "a", newline="", encoding="utf-8") as file:
         writer = csv.writer(file)
-        if not file_exists:
-            writer.writerow(["Timestamp","Score","Percentage","Rating","Comment"])
-        writer.writerow([datetime.now().strftime("%Y-%m-%d %H:%M:%S"), score, total_answered, f"{percentage:.0f}", rating, comments])
 
+        if not file_exists:
+            writer.writerow([
+                "Timestamp",
+                "Score",
+                "Percentage",
+                "Rating",
+                "Comment"
+            ])
+
+        writer.writerow([
+            datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+            score,
+            f"{percentage:.0f}",
+            rating,
+            comments.replace("\n", " ")
+        ])
 def reset_chatbot():
     for key in list(st.session_state.keys()):
         del st.session_state[key]
@@ -177,7 +191,7 @@ else:
         comments = st.text_area("Optional comments (no personal info)")
 
         if not st.session_state.feedback_submitted and st.button("Submit Feedback"):
-            save_feedback(st.session_state.score, st.session_state.score, percentage, rating, comments)
+            save_feedback(st.session_state.score, percentage, rating, comments)
             st.session_state.feedback_submitted = True
             st.success("Thank you! Feedback recorded anonymously.")
         elif st.session_state.feedback_submitted:
