@@ -182,20 +182,34 @@ else:
 # --- Final Results and Feedback ---
     else:
         st.subheader("Final Results")
-        percentage = (st.session_state.score / st.session_state.total_answered * 100) if st.session_state.total_answered > 0 else 0
+
+        percentage = (
+            st.session_state.score / st.session_state.total_answered * 100
+        ) if st.session_state.total_answered > 0 else 0
+
         st.write(st.session_state.final_message)
-        st.write(f"Your final score is **{st.session_state.score} out of {st.session_state.total_answered}** ({percentage:.0f}%)")
+
+        st.write(
+            f"Your final score is **{st.session_state.score} out of "
+            f"{st.session_state.total_answered}** ({percentage:.0f}%)"
+        )
 
         st.subheader("Feedback")
-        rating = st.slider("How did the chatbot feel to use? 1 = worst, 5 = best", 1, 5, 3)
-        comments = st.text_area("Optional comments (no personal info)")
 
-        if not st.session_state.feedback_submitted and st.button("Submit Feedback"):
-            save_feedback(st.session_state.score, percentage, rating, comments)
-            st.session_state.feedback_submitted = True
-            st.success("Thank you! Feedback recorded anonymously.")
-        elif st.session_state.feedback_submitted:
-            st.success("Feedback already submitted. Thank you.")
+        st.write("""
+        Please complete the anonymous feedback form below.
+
+        Do not include names, email addresses, passwords,
+        student numbers, or personal information.
+        """)
+
+        st.write(f"Score: {st.session_state.score}")
+        st.write(f"Percentage: {percentage:.0f}%")
+
+        st.link_button(
+            "Open Feedback Form",
+            "https://forms.gle/Ur1cL2hbm9CGLGvZ7"
+        )
 
         if st.button("Restart"):
             reset_chatbot()
